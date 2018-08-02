@@ -174,5 +174,44 @@ namespace TestKryptonWinForms
         {
             InitSyntaxColoring(isDarkTheme: true);
         }
+
+        private void helpToolStripButton_Click(object sender, EventArgs e)
+        {
+            TreeNode node = new TreeNode("One");
+            treeView1.Nodes.Add(node);
+            var r = new Random(10);
+            int iMax = r.Next(10);
+            string str = "";
+            TreeNode lastSubNode = node;
+            for (int i = 0; i < iMax; i++)
+            {
+                str = str + "next word " + i.ToString();
+                if (r.Next(2) == 1)
+                {
+                    TreeNode tmpNode = new TreeNode(str);
+                    lastSubNode.Nodes.Add(tmpNode);
+                    lastSubNode = tmpNode;
+                }
+
+            }
+            TreeNode node3 = new TreeNode(str);
+            node.Nodes.Add(node3);
+        }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Blue;
+            treeView1.StateCommon.Back.Color1 = Color.Empty;
+            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.Black;
+            treeView1.StateCommon.Node.Back.Color1 = Color.PaleGreen;
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Black;
+            treeView1.StateCommon.Back.Color1 = Color.DimGray;
+            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.White;
+            treeView1.StateCommon.Node.Back.Color1 = Color.RoyalBlue;
+        }
     }
 }
