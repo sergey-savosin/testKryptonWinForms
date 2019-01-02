@@ -167,11 +167,27 @@ namespace TestKryptonWinForms
 
         private void btLightScheme_Click(object sender, EventArgs e)
         {
+            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Blue;
+            treeView1.StateCommon.Back.Color1 = Color.Empty;
+            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.Black;
+            treeView1.StateCommon.Node.Back.Color1 = Color.PaleGreen;
+
+            kryptonHeaderGroup2.Palette = kryptonPalette_Office2010_Blue;
+
             InitSyntaxColoring(isDarkTheme: false);
         }
 
         private void btDarkScheme_Click(object sender, EventArgs e)
         {
+            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Black;
+            treeView1.StateCommon.Back.Color1 = Color.DimGray;
+            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.White;
+            treeView1.StateCommon.Node.Back.Color1 = Color.RoyalBlue;
+
+            kryptonHeaderGroup2.Palette = kryptonPalette_Office2010_Black;
+            kryptonHeaderGroup2.Panel.BackColor = Color.DimGray;
+            kryptonHeaderGroup2.Panel.ForeColor = Color.Red;
+
             InitSyntaxColoring(isDarkTheme: true);
         }
 
@@ -198,20 +214,5 @@ namespace TestKryptonWinForms
             node.Nodes.Add(node3);
         }
 
-        private void cutToolStripButton_Click(object sender, EventArgs e)
-        {
-            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Blue;
-            treeView1.StateCommon.Back.Color1 = Color.Empty;
-            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.Black;
-            treeView1.StateCommon.Node.Back.Color1 = Color.PaleGreen;
-        }
-
-        private void pasteToolStripButton_Click(object sender, EventArgs e)
-        {
-            kryptonManager1.GlobalPalette = kryptonPalette_Office2010_Black;
-            treeView1.StateCommon.Back.Color1 = Color.DimGray;
-            treeView1.StateCommon.Node.Content.ShortText.Color1 = Color.White;
-            treeView1.StateCommon.Node.Back.Color1 = Color.RoyalBlue;
-        }
     }
 }
