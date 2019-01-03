@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestKryptonWinForms.Contracts;
+using TestKryptonWinForms.Repository;
 
 namespace TestKryptonWinForms
 {
-    public partial class Form1 : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class FormMain : ComponentFactory.Krypton.Toolkit.KryptonForm
     {
         private const int SCLEX_MSSQL = 55;
         private const int SCE_MSSQL_DEFAULT = 0;
@@ -34,8 +36,9 @@ namespace TestKryptonWinForms
         private const int SCE_MSSQL_LINE_NUMBER = 33;
 
         ScintillaNET.Scintilla scintillaTextBox;
+        IRepository sqlRepository;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -61,6 +64,11 @@ namespace TestKryptonWinForms
             InitSyntaxColoring(isDarkTheme: true);
 
             scintillaTextBox.Text = getSampleSqlText();
+
+            sqlRepository = new SqlServerRepository();
+            // Fill cbConnections
+
+            cbConnection.ComboBox.DataSource = sqlRepository.GetAllConnectionNames();
         }
 
         public static Color IntToColor(int rgb)
@@ -214,5 +222,12 @@ namespace TestKryptonWinForms
             node.Nodes.Add(node3);
         }
 
+        private void cbConnection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbDatabase.Items.Clear();
+            string connectionName = cbConnection.SelectedItem.ToString();
+            ConnectionDetails connection = sqlRepository.GetConnectionDetails(connectionName);
+            cbDatabase.ComboBox.Text = connection.DefaultDatabaseName;
+        }
     }
 }
